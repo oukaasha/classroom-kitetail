@@ -15,7 +15,17 @@
                     <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-jet-nav-link>
+                    <x-jet-nav-link href="{{ route('questions') }}" :active="request()->routeIs('questions')">
+                        {{ __('Questions') }}
+                    </x-jet-nav-link>
                 </div>
+            </div>
+
+            <!-- Role Badge -->
+            <div class="ml-auto mr-6 self-center">
+                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800 uppercase">
+                    {{ Auth::user()->role }}
+                </span>
             </div>
 
             <!-- Settings Dropdown -->
@@ -120,6 +130,9 @@
             <x-jet-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-jet-responsive-nav-link>
+            <x-jet-responsive-nav-link href="{{ route('questions') }}" :active="request()->routeIs('questions')">
+                {{ __('Questions') }}
+            </x-jet-nav-link>
         </div>
 
         <!-- Responsive Settings Options -->
