@@ -22,9 +22,10 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
         return view('dashboard');
     })->name('dashboard');
 
-    Route::group(['namespace' => 'App\Http\Livewire\Questions'], function () {
+    Route::group(['namespace' => 'App\Http\Livewire'], function () {
         
-        Route::get('/questions', ShowQuestions::class)->name('questions');
+        Route::get('/questions', Questions\ShowQuestions::class)->name('questions');
+        Route::get('/questions/{question_id}/answers', Answers\ShowAnswers::class)->name('answers');
 
     });
 });

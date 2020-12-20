@@ -132,7 +132,7 @@
             </x-jet-responsive-nav-link>
             <x-jet-responsive-nav-link href="{{ route('questions') }}" :active="request()->routeIs('questions')">
                 {{ __('Questions') }}
-            </x-jet-nav-link>
+            </x-jet-responsive-nav-link>
         </div>
 
         <!-- Responsive Settings Options -->

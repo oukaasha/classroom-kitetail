@@ -3,7 +3,7 @@
         <div class="flex flex-wrap -m-4">
             @foreach ($question_list as $question)
                 <div class="w-full p-4 {{ $loop->last ? 'mb-10' : '' }}">
-                    <a href="#">
+                    <a href="{{ route('answers', ['question_id' => $question->question_id]) }}">
                         <div class="hover:shadow-xl hover:border-indigo-500 bg-white border border-gray-300 p-6 rounded-lg">
                             <h4 class="font-semibold text-xl text-gray-800 leading-tight mb-4">
                                 {{ $question->question_text }}

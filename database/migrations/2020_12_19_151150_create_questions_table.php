@@ -18,7 +18,7 @@ class CreateQuestionsTable extends Migration
 
             $table->text('question_text');
             $table->text('question_description');
-            $table->text('accepted_answer_id')->nullable();
+            $table->integer('accepted_answer_id')->nullable();
 
             $table->integer('user_id');
 

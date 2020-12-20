@@ -1,4 +1,5 @@
-<div x-data="{ new_question: false, question_text: '', question_description: '' }"
+<div
+    x-data="{ new_question: false, question_text: '', question_description: '' }"
     x-init="() => {
         $watch('new_question', (value) => {
             if (value) {
