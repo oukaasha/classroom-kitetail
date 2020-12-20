@@ -1,4 +1,4 @@
-<div>
+<div wire:poll.5s>
     {{-- Knowing others is intelligence; knowing yourself is true wisdom. --}}
     @foreach ($answers_list as $answer)
         <div class="bg-white border p-6 rounded-lg mb-5 {{ $accepted_answer && $accepted_answer->answer_id == $answer->answer_id ? 'border-green-600 shadow-xl' : 'border-black-500 shadow-md' }}">

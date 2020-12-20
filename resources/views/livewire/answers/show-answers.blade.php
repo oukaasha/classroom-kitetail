@@ -18,6 +18,10 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <a href="{{ route('questions') }}" class="inline-flex justify-center mb-5 py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-gray-600 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
+                Go Back
+            </a>
+
             <div class="shadow-xl border-indigo-500 bg-white border border-gray-300 p-6 rounded-lg">
                 <span class="font-light text-gray-600">{{ \Carbon\Carbon::parse($question->created_at)->format('F j, Y g:i A') }}</span>
                 <div class="mt-2">

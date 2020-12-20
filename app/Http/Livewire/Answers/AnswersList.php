@@ -11,22 +11,22 @@ use Livewire\Component;
 class AnswersList extends Component
 {
     public $question;
-    public $accepted_answer;
 
     protected $listeners = [
-        'answer-given' => 'render',
-        'answer-accepted' => 'render'
+        'answer-given' => '$refresh',
+        'answer-accepted' => '$refresh'
     ];
 
     public function mount($question)
     {
         $this->question = $question;
-        $this->accepted_answer = $question->accepted_answer;
     }
 
     public function render()
     {
-        $accepted_answer_id = $this->question->accepted_answer_id;
+        $accepted_answer_array = $this->accepted_answer();
+        $accepted_answer_id = $accepted_answer_array[0];
+        $accepted_answer = $accepted_answer_array[1];
         $answers_list = Answer::where('question_id', $this->question->question_id)
                                 ->when($accepted_answer_id, function ($query, $accepted_answer_id) {
                                     return $query->orderByRaw("answer_id <> $accepted_answer_id");
@@ -36,15 +36,28 @@ class AnswersList extends Component
         return view('livewire.answers.answers-list', [
             'answers_list' => $answers_list,
             'question' => $this->question,
-            'accepted_answer' => $this->accepted_answer
+            'accepted_answer' => $accepted_answer
         ]);
+    }
+
+    public function accepted_answer()
+    {
+        $question = Question::find($this->question->question_id);
+        $accepted_answer = $question->accepted_answer;
+        $accepted_answer_id = null;
+        if ($accepted_answer)
+        {
+            $accepted_answer_id = $accepted_answer->answer_id;
+        }
+        return [$accepted_answer_id, $accepted_answer];
     }
 
     public function accept_answer($answer_id)
     {
         $answer = Answer::findOrFail($answer_id);
         if (
-            $answer->question_id == $this->question->question_id
+            !$this->accepted_answer()[0]
+            && $answer->question_id == $this->question->question_id
             && (
                 $this->question->user_id == Auth::id()
                 || Auth::user()->role == 'teacher'
@@ -54,7 +67,6 @@ class AnswersList extends Component
             $this->question->accepted_answer_id = $answer->answer_id;
             $this->question->save();
 
-            $this->accepted_answer = $answer;
             $this->emit('answer-accepted');
         }
     }

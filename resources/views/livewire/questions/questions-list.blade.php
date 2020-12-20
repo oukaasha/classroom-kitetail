@@ -1,4 +1,4 @@
-<div>
+<div wire:poll.5s>
     <div class="overflow-hidden sm:rounded-lg">
         <div class="flex flex-wrap -m-4">
             @foreach ($question_list as $question)

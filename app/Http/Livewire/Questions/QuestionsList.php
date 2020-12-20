@@ -8,7 +8,7 @@ use Livewire\Component;
 
 class QuestionsList extends Component
 {
-    protected $listeners = ['question-added' => 'render'];
+    protected $listeners = ['question-added' => '$refresh'];
 
     public function render()
     {
