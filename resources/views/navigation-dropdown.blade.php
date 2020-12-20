@@ -15,6 +15,11 @@
                     <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-jet-nav-link>
+                    @if (Auth::user()->is_teacher())
+                        <x-jet-nav-link href="{{ route('whiteboard') }}" :active="request()->routeIs('whiteboard')">
+                            {{ __('Whiteboard') }}
+                        </x-jet-nav-link>
+                    @endif
                     <x-jet-nav-link href="{{ route('questions') }}" :active="request()->routeIs('questions')">
                         {{ __('Questions') }}
                     </x-jet-nav-link>
@@ -130,6 +135,11 @@
             <x-jet-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-jet-responsive-nav-link>
+            @if (Auth::user()->is_teacher())
+                <x-jet-responsive-nav-link href="{{ route('whiteboard') }}" :active="request()->routeIs('whiteboard')">
+                    {{ __('Whiteboard') }}
+                </x-jet-responsive-nav-link>
+            @endif
             <x-jet-responsive-nav-link href="{{ route('questions') }}" :active="request()->routeIs('questions')">
                 {{ __('Questions') }}
             </x-jet-responsive-nav-link>
