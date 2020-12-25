@@ -21,9 +21,9 @@
 
 ## Keys that need to be changed in .env file
 
-DB_CONNECTION=mysql
-DB_HOST=127.0.0.1
-DB_PORT=3306
-DB_DATABASE=kitetail
-DB_USERNAME=root
-DB_PASSWORD=
+DB_CONNECTION=mysql  
+DB_HOST=127.0.0.1  
+DB_PORT=3306  
+DB_DATABASE=kitetail  
+DB_USERNAME=root  
+DB_PASSWORD=  
