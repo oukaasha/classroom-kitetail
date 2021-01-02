@@ -4,8 +4,10 @@ namespace App\Http\Livewire\Courses;
 
 use Auth;
 use App\Models\Course;
+use App\Models\CourseContent;
 
 use Livewire\Component;
+use Illuminate\Support\Facades\Storage;
 
 class CoursesList extends Component
 {
@@ -56,6 +58,20 @@ class CoursesList extends Component
         $course = Course::findOrFail($this->selected_course_id);
         if ($course->user_id == Auth::id() && Auth::user()->is_teacher())
         {
+            $course_content_list = CourseContent::where('course_id', $course->course_id)->get();
+            foreach ($course_content_list as $course_content)
+            {
+                try
+                {
+                    Storage::delete($course_content->course_content_file_path);
+                }
+                catch (\Throwable $e)
+                {
+                    // Do something
+                }
+    
+                $course_content->delete();
+            }
             $course->delete();
     
             $this->selected_course_id = null;
