@@ -20,6 +20,9 @@
                             {{ __('Whiteboard') }}
                         </x-jet-nav-link>
                     @endif
+                    <x-jet-nav-link href="{{ route('courses') }}" :active="request()->routeIs('courses')">
+                        {{ __('Courses') }}
+                    </x-jet-nav-link>
                     <x-jet-nav-link href="{{ route('questions') }}" :active="request()->routeIs('questions')">
                         {{ __('Questions') }}
                     </x-jet-nav-link>
@@ -140,6 +143,9 @@
                     {{ __('Whiteboard') }}
                 </x-jet-responsive-nav-link>
             @endif
+            <x-jet-responsive-nav-link href="{{ route('courses') }}" :active="request()->routeIs('courses')">
+                {{ __('Courses') }}
+            </x-jet-responsive-nav-link>
             <x-jet-responsive-nav-link href="{{ route('questions') }}" :active="request()->routeIs('questions')">
                 {{ __('Questions') }}
             </x-jet-responsive-nav-link>
