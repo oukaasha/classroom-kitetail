@@ -25,6 +25,7 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
     Route::group(['namespace' => 'App\Http\Livewire'], function () {
         
         Route::get('/courses', Courses\ShowCourses::class)->name('courses');
+        Route::get('/courses/{course_id}/content', Courses\ShowCourseContent::class)->name('course_content');
         Route::get('/questions', Questions\ShowQuestions::class)->name('questions');
         Route::get('/questions/{question_id}/answers', Answers\ShowAnswers::class)->name('answers');
         Route::get('/whiteboard', Whiteboard\ShowWhiteboard::class)->name('whiteboard')->middleware('teacher');

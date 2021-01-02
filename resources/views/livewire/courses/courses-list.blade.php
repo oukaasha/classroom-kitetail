@@ -4,24 +4,26 @@
         @foreach ($course_list as $course)
             <div class="my-1 px-1 w-full md:w-1/3 lg:my-4 lg:px-4 lg:w-1/4">
 
-                <article class="overflow-hidden rounded-lg shadow-lg hover:shadow-xl hover:border-indigo-500 border border-gray-300">
-
-                    <header class="flex items-center justify-between leading-tight p-2 md:p-4">
-                        <h1 class="text-lg">
-                            {{ $course->course_name }}
-                        </h1>
-                    </header>
-
-                    <footer class="leading-none p-2 md:p-4">
-                        <p class="text-sm">
-                            {{ $course->user->name }}
-                        </p>
-                        <p class="mt-2 text-grey-darker text-sm">
-                            {{ \Carbon\Carbon::parse($course->created_at)->format('F j, Y') }}
-                        </p>
-                    </footer>
-
-                </article>
+                <a href="{{ route('course_content', ['course_id' => $course->course_id]) }}">
+                    <article class="overflow-hidden rounded-lg shadow-lg bg-white hover:shadow-xl hover:border-indigo-500 border border-gray-300">
+    
+                        <header class="flex items-center justify-between leading-tight p-2 md:p-4">
+                            <h1 class="text-lg">
+                                {{ $course->course_name }}
+                            </h1>
+                        </header>
+    
+                        <footer class="leading-none p-2 md:p-4">
+                            <p class="text-sm">
+                                {{ $course->user->name }}
+                            </p>
+                            <p class="mt-2 text-grey-darker text-sm">
+                                {{ \Carbon\Carbon::parse($course->created_at)->format('F j, Y') }}
+                            </p>
+                        </footer>
+    
+                    </article>
+                </a>
 
                 @if (
                     $course->user_id == Auth::id()

@@ -18,6 +18,7 @@ class CreateCourseContentsTable extends Migration
 
             $table->text('course_content_file_name');
             $table->text('course_content_file_path');
+            $table->text('course_content_file_extension');
 
             $table->integer('user_id');
             $table->integer('course_id');
