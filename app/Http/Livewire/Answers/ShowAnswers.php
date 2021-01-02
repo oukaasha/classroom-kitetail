@@ -11,6 +11,10 @@ class ShowAnswers extends Component
 {
     public $question;
 
+    protected $listeners = [
+        'question-deleted' => '$refresh'
+    ];
+
     public function mount($question_id)
     {
         $this->question = Question::findOrFail($question_id);

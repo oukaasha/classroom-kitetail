@@ -14,7 +14,8 @@ class AnswersList extends Component
 
     protected $listeners = [
         'answer-given' => '$refresh',
-        'answer-accepted' => '$refresh'
+        'answer-accepted' => '$refresh',
+        'question-deleted' => '$refresh'
     ];
 
     public function mount($question)
