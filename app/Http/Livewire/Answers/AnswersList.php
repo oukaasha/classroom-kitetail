@@ -10,12 +10,25 @@ use Livewire\Component;
 
 class AnswersList extends Component
 {
+    public $display_edit_answer_form = false;
+    public $confirming_answer_deletion = false;
+
+    public $selected_answer_id;
+
+    public $answer_text;
+
     public $question;
 
     protected $listeners = [
         'answer-given' => '$refresh',
         'answer-accepted' => '$refresh',
+        'answer-deleted' => '$refresh',
+        'answer-updated' => '$refresh',
         'question-deleted' => '$refresh'
+    ];
+
+    protected $rules = [
+        'answer_text' => 'required|min:50',
     ];
 
     public function mount($question)
@@ -71,4 +84,79 @@ class AnswersList extends Component
             $this->emit('answer-accepted');
         }
     }
+
+    /**
+     * Confirm deletion of a answer.
+     * 
+     * @param  int $answer_id
+     */
+    public function confirm_deletion($answer_id)
+    {
+        $answer = Answer::findOrFail($answer_id);
+        if ($answer->user_id == Auth::id() || $this->question->user_id == Auth::id() || Auth::user()->is_teacher())
+        {
+            $this->selected_answer_id = $answer_id;
+            $this->confirming_answer_deletion = true;
+        }
+    }
+
+    /**
+     * Delete an existing answer.
+     * 
+     */
+    public function delete_answer()
+    {
+        $answer = Answer::findOrFail($this->selected_answer_id);
+        if ($answer->user_id == Auth::id() || $this->question->user_id == Auth::id() || Auth::user()->is_teacher())
+        {
+            $answer->delete();
+    
+            $this->selected_answer_id = null;
+            $this->confirming_answer_deletion = false;
+    
+            $this->emit('answer-deleted');
+        }
+    }
+
+    /**
+     * Display form for editing a answer.
+     * 
+     * @param  int $answer_id
+     */
+    public function display_edit_form($answer_id)
+    {
+        $answer = Answer::findOrFail($answer_id);
+        if ($answer->user_id == Auth::id() || $this->question->user_id == Auth::id() || Auth::user()->is_teacher())
+        {
+            $this->selected_answer_id = $answer->answer_id;
+            
+            $this->answer_text = $answer->answer_text;
+
+            $this->display_edit_answer_form = true;
+        }
+    }
+
+    /**
+     * Update an existing answer.
+     * 
+     */
+    public function update_answer()
+    {
+        $answer = Answer::findOrFail($this->selected_answer_id);
+        if ($answer->user_id == Auth::id() || $this->question->user_id == Auth::id() || Auth::user()->is_teacher())
+        {
+            $this->validate();
+
+            $answer->answer_text = $this->answer_text;
+
+            $answer->save();
+
+            $this->answer_text = '';
+            $this->selected_answer_id = null;
+            $this->display_edit_answer_form = false;
+    
+            $this->emit('answer-updated');
+        }
+    }
+
 }
