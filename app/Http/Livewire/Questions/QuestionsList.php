@@ -41,7 +41,8 @@ class QuestionsList extends Component
      */
     public function confirm_deletion($question_id)
     {
-        if (Auth::user()->is_teacher())
+        $question = Question::findOrFail($question_id);
+        if ($question->user_id == Auth::id() || Auth::user()->is_teacher())
         {
             $this->selected_question_id = $question_id;
             $this->confirming_question_deletion = true;
@@ -54,9 +55,9 @@ class QuestionsList extends Component
      */
     public function delete_question()
     {
-        if (Auth::user()->is_teacher())
+        $question = Question::findOrFail($this->selected_question_id);
+        if ($question->user_id == Auth::id() || Auth::user()->is_teacher())
         {
-            $question = Question::findOrFail($this->selected_question_id);
             $question->answers()->delete();
             $question->delete();
     
@@ -74,11 +75,10 @@ class QuestionsList extends Component
      */
     public function display_edit_form($question_id)
     {
-        if (Auth::user()->is_teacher())
+        $question = Question::findOrFail($question_id);
+        if ($question->user_id == Auth::id() || Auth::user()->is_teacher())
         {
-            $this->selected_question_id = $question_id;
-
-            $question = Question::findOrFail($this->selected_question_id);
+            $this->selected_question_id = $question->question_id;
             
             $this->question_text = $question->question_text;
             $this->question_description = $question->question_description;
@@ -93,11 +93,10 @@ class QuestionsList extends Component
      */
     public function update_question()
     {
-        if (Auth::user()->is_teacher())
+        $question = Question::findOrFail($this->selected_question_id);
+        if ($question->user_id == Auth::id() || Auth::user()->is_teacher())
         {
             $this->validate();
-
-            $question = Question::findOrFail($this->selected_question_id);
 
             $question->question_text = $this->question_text;
             $question->question_description = $this->question_description;

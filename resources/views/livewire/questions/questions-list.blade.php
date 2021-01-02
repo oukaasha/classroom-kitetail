@@ -3,7 +3,10 @@
         <div class="flex flex-wrap -m-4">
             @foreach ($question_list as $question)
                 <div class="w-full p-4 {{ $loop->last ? 'mb-10' : '' }}">
-                    @if (Auth::user()->is_teacher())
+                    @if (
+                        $question->user_id == Auth::id()
+                        || Auth::user()->is_teacher()
+                        )
                         <button wire:click="confirm_deletion({{ $question->question_id }})" class="inline-flex justify-center float-right mr-3 mt-3 mb-1 py-2 px-4 border border-red-600 shadow-sm text-sm font-medium rounded-md text-red-600 hover:bg-red-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500" type="button">
                             Delete
                         </button>
