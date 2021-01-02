@@ -26,17 +26,20 @@ class CourseForm extends Component
      */
     public function create_course()
     {
-        $this->validate();
-
-        $course = new Course;
-
-        $course->course_name = $this->course_name;
-
-        $course->user_id = Auth::id();
-
-        $course->save();
-
-        $this->dispatchBrowserEvent('course-added');
-        $this->emit('course-added');
+        if (Auth::user()->is_teacher())
+        {
+            $this->validate();
+    
+            $course = new Course;
+    
+            $course->course_name = $this->course_name;
+    
+            $course->user_id = Auth::id();
+    
+            $course->save();
+    
+            $this->dispatchBrowserEvent('course-added');
+            $this->emit('course-added');
+        }
     }
 }
