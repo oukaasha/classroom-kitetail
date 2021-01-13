@@ -15,11 +15,9 @@
                     <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->is('dashboard')">
                         {{ __('Dashboard') }}
                     </x-jet-nav-link>
-                    @if (Auth::user()->is_teacher())
-                        <x-jet-nav-link href="{{ route('whiteboard') }}" :active="request()->is('whiteboard')">
-                            {{ __('Whiteboard') }}
-                        </x-jet-nav-link>
-                    @endif
+                    <x-jet-nav-link href="{{ route('whiteboard') }}" :active="request()->is('whiteboard')">
+                        {{ __('Whiteboard') }}
+                    </x-jet-nav-link>
                     <x-jet-nav-link href="{{ route('courses') }}" :active="request()->is('courses*')">
                         {{ __('Courses') }}
                     </x-jet-nav-link>
@@ -138,11 +136,9 @@
             <x-jet-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->is('dashboard')">
                 {{ __('Dashboard') }}
             </x-jet-responsive-nav-link>
-            @if (Auth::user()->is_teacher())
-                <x-jet-responsive-nav-link href="{{ route('whiteboard') }}" :active="request()->is('whiteboard')">
-                    {{ __('Whiteboard') }}
-                </x-jet-responsive-nav-link>
-            @endif
+            <x-jet-responsive-nav-link href="{{ route('whiteboard') }}" :active="request()->is('whiteboard')">
+                {{ __('Whiteboard') }}
+            </x-jet-responsive-nav-link>
             <x-jet-responsive-nav-link href="{{ route('courses') }}" :active="request()->is('courses*')">
                 {{ __('Courses') }}
             </x-jet-responsive-nav-link>
