@@ -17,7 +17,7 @@ class CreateAnswersTable extends Migration
             $table->bigIncrements('answer_id');
 
             $table->text('answer_text');
-            $table->text('question_id');
+            $table->bigInteger('question_id');
 
             $table->integer('user_id');
 

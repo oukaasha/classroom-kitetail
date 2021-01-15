@@ -18,9 +18,7 @@ Route::get('/', function () {
 });
 
 Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+    Route::get('/dashboard', 'App\Http\Controllers\DashboardController@index')->name('dashboard');
 
     Route::group(['namespace' => 'App\Http\Livewire'], function () {
         
